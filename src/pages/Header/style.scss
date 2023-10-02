@@ -1,0 +1,23 @@
+.features {
+    margin-left: 20px;
+    margin-right: 20px;
+    div {
+        display: flex;
+        align-items: center;
+        p {
+            margin-right: 10px;
+            margin-top: auto;
+            margin-bottom: auto;
+            font-size: 15px;
+        }
+        a:hover {
+            color: rgb(34, 180, 82);
+            border-bottom: 2px solid white;
+        }
+        a  {
+            text-decoration: none;
+            margin-right: 15px;
+            color:cornsilk ;
+        }
+    }
+}

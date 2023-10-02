@@ -1,0 +1,28 @@
+.footer {
+    background: linear-gradient(to bottom right, rgb(57, 55, 55), rgb(37, 28, 28));
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .footer_right {
+        width: 60%;
+        text-align: center;
+    }
+    .footer_left {
+        display: flex;
+        justify-content: space-evenly;
+        width: 40%;
+    }
+    p, h5, h4 {
+        color: rgb(172, 182, 182);
+    }
+    .icons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .icon_item {
+            margin-bottom: 10px;
+            color: rgb(47, 47, 205);
+        }
+    }
+}
