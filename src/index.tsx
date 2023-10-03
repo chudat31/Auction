@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { Route, Router, Routes, BrowserRouter } from "react-router-dom";
 import AnimatedPage from "./Animated";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import Register from "./components/SignIn/Register";
+import Login from "./components/Login/Login";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,6 +17,8 @@ root.render(
       <AnimatedPage>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </AnimatedPage>
     </BrowserRouter>
