@@ -1,101 +1,30 @@
-import "./style.scss";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useState } from "react";
-// import * as ReactBootstrap from "react-bootstrap";
-function Header() {
-  const navigate = useNavigate();
+import React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("name")
-    navigate("/login");
-  };
-
-  const [isLogin, setIsLogin] = useState(false);
-  const [username, setUsername] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-  // const [phoneNum, setPhoneNum] = useState("");
-  // const [role, setRole] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8089/users/detail", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((respone:any) => {
-        setUsername(respone.data.data.username);
-        if (respone.data.data.username === "chudat31") {
-          setIsAdmin(true);
-        } else setIsAdmin(false);
-        // setPhoneNum(respone.data.data.phone_number);
-        // setRole(respone.data.data.roles[0].name);
-        setIsLogin(true);
-      })
-      .catch(() => {
-        setIsLogin(false);
-      });
-  }, []);
-
+const Header = () => {
   return (
-    <Navbar
-      className="navbar_header"
-      fixed="top"
-      collapseOnSelect
-      expand="lg"
-      bg="dark"
-      variant="dark"
-    >
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse className="features" id="responsive-navbar-nav">
-        {isLogin && (
-          <Nav className="me-auto">
-            <Nav.Item className="home">
-              <Link to="/">HOME</Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Link to="/aboutus">ABOUT US</Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Link to="/listproduct">PRODUCT LIST</Link>
-            </Nav.Item>
-            {isAdmin && (
-              <Nav.Item>
-                <Link to="/newproduct">NEW PRODUCT</Link>
-              </Nav.Item>
-            )}
-          </Nav>
-        )}
-
-        <Nav>
-          {!isLogin && (
-            <Nav.Item>
-              <Link to="/register">REGISTER</Link>
-            </Nav.Item>
-          )}
-
-          {!isLogin && (
-            <Nav.Item>
-              <Link to="/login">LOGIN</Link>
-            </Nav.Item>
-          )}
-
-          {isLogin && (
-            <Nav.Item>
-              <p style={{ color: "white" }}>Welcome, {username}</p>
-              <Link to={"/search"}>SEARCH</Link>
-              <Link to={"/login"} onClick={handleLogout}>
-                LOGOUT
-              </Link>
-            </Nav.Item>
-          )}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            {/* Icon hoặc nút menu */}
+          </IconButton>
+          <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+            AUCTION
+          </Typography>
+          <Button color="inherit" component={Link} to="/">Home</Button>
+          <Button color="inherit" component={Link} to="/introduction">About Us</Button>
+          <Button color="inherit" component={Link} to="/contact">Contact</Button>
+          <Button color="inherit" component={Link} to="/login">Login</Button>
+          <Button color="inherit" component={Link} to="/register">Register</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }
 
