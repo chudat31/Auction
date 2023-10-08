@@ -81,7 +81,7 @@ function Login() {
             </Form.Label>
           </Form.Group>
           <h5>Already have an account? <Link to={"/register"}>Register</Link></h5>
-          <Button variant="light" size="sm" className="rounded mx" type="submit" >
+          <Button>
             Login
           </Button>
         </Form>

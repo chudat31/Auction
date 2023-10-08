@@ -8,6 +8,8 @@ import AnimatedPage from "./Animated";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Register from "./components/SignIn/Register";
 import Login from "./components/Login/Login";
+import PageIntroduction from "./pages/PageIntroduction/PageIntroduction";
+import Contact from "./pages/PageIntroduction/Contact";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -19,6 +21,8 @@ root.render(
           <Route path="/" element={<LandingPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/introduction" element={<PageIntroduction />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </AnimatedPage>
     </BrowserRouter>
