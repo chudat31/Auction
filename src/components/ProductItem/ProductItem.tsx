@@ -68,7 +68,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ products }) => {
           <ProductImage src={product.image} alt={product.name} />
           <ProductInfo>
             <ProductName>{product.name}</ProductName>
-            <ProductPrice>${product.price}</ProductPrice>
+            <strong>Giá đấu hiện tại:</strong><ProductPrice> {product.price}</ProductPrice>
             <ProductDescription>{product.description}</ProductDescription>
           </ProductInfo>
         </ProductContainer>
