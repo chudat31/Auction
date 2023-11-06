@@ -17,11 +17,12 @@ const Header = () => {
           <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
             AUCTION
           </Typography>
-          <Button color="inherit" component={Link} to="/">Home</Button>
+          <Button color="inherit" component={Link} to="/home">Home</Button>
           <Button color="inherit" component={Link} to="/introduction">About Us</Button>
           <Button color="inherit" component={Link} to="/contact">Contact</Button>
           <Button color="inherit" component={Link} to="/login">Login</Button>
           <Button color="inherit" component={Link} to="/register">Register</Button>
+          <Button color="inherit" component={Link} to="/search">SEARCHING</Button>
         </Toolbar>
       </AppBar>
     </div>

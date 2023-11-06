@@ -10,6 +10,7 @@ import Register from "./components/SignIn/Register";
 import Login from "./components/Login/Login";
 import PageIntroduction from "./pages/PageIntroduction/PageIntroduction";
 import Contact from "./pages/PageIntroduction/Contact";
+import ProductDetail from "./components/ProductDetail/ProductDetail";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,11 +19,13 @@ root.render(
   <BrowserRouter>
       <AnimatedPage>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/introduction" element={<PageIntroduction />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/home" element={<LandingPage />} />
+          <Route path="/search" element={<ProductDetail />} />
         </Routes>
       </AnimatedPage>
     </BrowserRouter>
