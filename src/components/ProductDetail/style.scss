@@ -1,0 +1,64 @@
+.search-container-fluid {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  
+    h1 {
+      color: #007bff;
+      font-size: 24px;
+      margin-bottom: 15px;
+      i {
+        margin-right: 10px;
+      }
+    }
+  
+    form {
+      margin-bottom: 20px;
+  
+      input[type="search"] {
+        border: 1px solid #ced4da;
+        padding: 5px 10px;
+        margin-right: 10px;
+        width: calc(100% - 130px);
+      }
+  
+      button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 7px 15px;
+        cursor: pointer;
+        &:hover {
+          background-color: #218838;
+        }
+      }
+    }
+  }
+  
+  .information {
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    margin-top: 20px;
+  
+    h4, h5 {
+      color: #343a40;
+      margin-bottom: 5px;
+    }
+  
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  
+    .price {
+      color: #dc3545;
+      font-weight: bold;
+    }
+  
+    .cert_id {
+      font-style: italic;
+    }
+  }
+  
