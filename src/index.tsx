@@ -11,6 +11,7 @@ import Login from "./components/Login/Login";
 import PageIntroduction from "./pages/PageIntroduction/PageIntroduction";
 import Contact from "./pages/PageIntroduction/Contact";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -26,6 +27,7 @@ root.render(
           <Route path="/contact" element={<Contact />} />
           <Route path="/home" element={<LandingPage />} />
           <Route path="/search" element={<ProductDetail />} />
+          <Route path="/user/detail" element={<UserProfile />} />
         </Routes>
       </AnimatedPage>
     </BrowserRouter>
