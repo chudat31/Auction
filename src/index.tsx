@@ -12,6 +12,7 @@ import PageIntroduction from "./pages/PageIntroduction/PageIntroduction";
 import Contact from "./pages/PageIntroduction/Contact";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import UserProfile from "./components/UserProfile/UserProfile";
+import ProductInformation from "./components/ProductInformation/ProductInformation";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -28,6 +29,7 @@ root.render(
           <Route path="/home" element={<LandingPage />} />
           <Route path="/search" element={<ProductDetail />} />
           <Route path="/user/detail" element={<UserProfile />} />
+          <Route path="/detail/:id" element={<ProductInformation />} />
         </Routes>
       </AnimatedPage>
     </BrowserRouter>

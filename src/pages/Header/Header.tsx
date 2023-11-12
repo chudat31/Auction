@@ -20,7 +20,7 @@ const Header = () => {
           <Typography
             variant="h6"
             component={Link}
-            to="/"
+            to="/home"
             style={{ textDecoration: "none", color: "inherit", flexGrow: 1 }}
           >
             AUCTION
