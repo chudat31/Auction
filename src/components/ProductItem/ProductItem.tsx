@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const ProductContainer = styled.div`
@@ -67,9 +68,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ products }) => {
         <ProductContainer key={index}>
           <ProductImage src={product.image} alt={product.name} />
           <ProductInfo>
-            <ProductName>{product.name}</ProductName>
+            <ProductName><Link to={`/detail/${product.id}`}>{product.name}</Link></ProductName>
             <strong>Giá đấu hiện tại:</strong><ProductPrice> {product.price}</ProductPrice>
-            <ProductDescription>{product.description}</ProductDescription>
           </ProductInfo>
         </ProductContainer>
       ))}

@@ -18,7 +18,7 @@ const IntroComponent = () => {
           Hãy tham gia ngay để có cơ hội sở hữu những sản phẩm độc đáo với giá hấp dẫn.
         </Typography>
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
-          <Button href="/" variant="contained" color="primary" size="large">
+          <Button href="/home" variant="contained" color="primary" size="large">
             Bắt đầu Đấu Giá
           </Button>
         </div>

@@ -9,6 +9,8 @@ function UserProfile() {
 
   const [phoneNumber, setPhoneNumber] = useState("");
 
+  const [role, setRole] = useState("");
+
   const [id, setId] = useState();
 
   useEffect(() => {
@@ -21,6 +23,7 @@ function UserProfile() {
       .then((res) => {
         setUsername(res.data.data.username);
         setPhoneNumber(res.data.data.phone_number);
+        setRole(res.data.data.roles[0].name);
         setId(res.data.data.id);
       });
   },[]);
@@ -42,6 +45,9 @@ function UserProfile() {
         <div id="two">
           <p>
             <strong>Tên đăng nhập: </strong> { username }
+          </p>
+          <p>
+            <strong>Vai trò: </strong> { role }
           </p>
           <p>
             <strong>Số điện thoại: </strong> {phoneNumber }

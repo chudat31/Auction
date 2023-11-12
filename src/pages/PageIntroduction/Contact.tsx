@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles.scss"
 import { Container, Typography, TextField, Button } from "@mui/material";
 const ContactComponent = () => {
   return (
