@@ -30,16 +30,11 @@ function Login() {
         urlencoded
       );
       localStorage.setItem("token", respone.data.access_token);
-      toast.loading("Login...Waiting a minute");
-      window.setTimeout(() => {
-        navigate("/home");
-      }, 3500);
+      toast.success("Đăng nhập thành công")
+      navigate("/home")
     } catch (e) {
       console.log(e);
-      toast.loading("Login...Waiting a minute");
-      window.setTimeout(() => {
-        toast.error("Login failed by something went wrong");
-      }, 3000);
+      toast.error("Thất bại, có lỗi xảy ra")
     }
   };
   return (

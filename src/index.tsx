@@ -13,12 +13,15 @@ import Contact from "./pages/PageIntroduction/Contact";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import UserProfile from "./components/UserProfile/UserProfile";
 import ProductInformation from "./components/ProductInformation/ProductInformation";
+import { ToastContainer } from "react-toastify";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <BrowserRouter>
+  <>
+    <ToastContainer />
+    <BrowserRouter>
       <AnimatedPage>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -33,6 +36,7 @@ root.render(
         </Routes>
       </AnimatedPage>
     </BrowserRouter>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
