@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from 'react';
+import Modal from './Modal';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -43,6 +44,19 @@ const ProductDescription = styled.p`
   margin-bottom: 10px;
 `;
 
+const BidButton = styled.button`
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
 interface Product {
   name: string;
   price: string;
@@ -56,6 +70,12 @@ interface ProductItemProps {
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ products }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const openModal = (product: Product) => {
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
   return (
     <div
       style={{
@@ -68,11 +88,13 @@ const ProductItem: React.FC<ProductItemProps> = ({ products }) => {
         <ProductContainer key={index}>
           <ProductImage src={product.image} alt={product.name} />
           <ProductInfo>
-            <ProductName><Link to={`/detail/${product.id}`}>{product.name}</Link></ProductName>
-            <strong>Giá đấu hiện tại:</strong><ProductPrice> {product.price}</ProductPrice>
+            <ProductName><Link style={{textDecoration:'none'}} to={`/detail/${product.id}`}>{product.name}</Link></ProductName>
+            <strong>Giá đấu cao nhất hiện tại:</strong><ProductPrice> {product.price}</ProductPrice>
+            <BidButton onClick={() => openModal(product)}>Trả giá</BidButton>
           </ProductInfo>
         </ProductContainer>
       ))}
+      {showModal && selectedProduct && <Modal product={selectedProduct} onClose={() => setShowModal(false)} />}
     </div>
   );
 };

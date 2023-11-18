@@ -4,20 +4,18 @@ import { Container, Typography, TextField, Button } from "@mui/material";
 const ContactComponent = () => {
   return (
     <Container>
-      <Typography variant="h4" align="center" gutterBottom>
-        Liên hệ chúng tôi
+      <Typography style={{marginTop:16}} variant="h4" align="center" gutterBottom>
+        Phản hồi cho chúng tôi
       </Typography>
-      <form>
-        <TextField label="Họ và tên" variant="outlined" />
-        <TextField label="Email" variant="outlined" />
+      <form style={{marginBottom:'16px'}}>
         <TextField
-          label="Nội dung tin nhắn"
+          label="Nội dung phản hồi"
           variant="outlined"
           multiline
           rows={6}
         />
         <Button variant="contained" color="primary">
-          Gửi Tin Nhắn
+          Gửi
         </Button>
       </form>
       <Typography variant="body1">
