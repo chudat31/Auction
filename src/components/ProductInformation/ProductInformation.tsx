@@ -43,7 +43,7 @@ function ProductInformation() {
             <strong>Mô tả: </strong> { description }
           </p>
           <p>
-            <strong>Giá thành: </strong> {price}
+            <strong>Giá đấu cao nhất hiện tại: </strong> {price}
           </p>
           <img src={image} alt="" />
         </div>

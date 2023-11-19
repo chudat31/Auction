@@ -30,6 +30,7 @@ function UserProfile() {
 
   return (
     <React.Fragment>
+      <Header />
       <h1>THÔNG TIN NGƯỜI DÙNG</h1>
       <div>
         <div id="one">

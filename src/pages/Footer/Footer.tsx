@@ -40,10 +40,6 @@ function Footer() {
         </div>
       </div>
       <div className="footer_right">
-        <p>This website provides a various kind of latest smart devices on technology such as Phone, Laptop and so on.
-            You will receive the information of our list product include Iphone 12, Pro, ProMax, 13, Pro, ProMax, Macbook Air, 
-            Macbook pro
-        </p>
         <p>Follow us: </p>
         <div className="icons">
             <BsTwitter className="icon_item"/>

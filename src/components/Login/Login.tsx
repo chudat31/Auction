@@ -31,7 +31,7 @@ function Login() {
       );
       localStorage.setItem("token", respone.data.access_token);
       toast.success("Đăng nhập thành công")
-      navigate("/home")
+      navigate("/introduction")
     } catch (e) {
       console.log(e);
       toast.error("Thất bại, có lỗi xảy ra")

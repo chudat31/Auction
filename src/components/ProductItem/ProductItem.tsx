@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import Modal from './Modal';
+import React, { useEffect, useState } from "react";
+import Modal from "./Modal";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
+import { Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 const ProductContainer = styled.div`
   display: flex;
@@ -57,6 +60,19 @@ const BidButton = styled.button`
   }
 `;
 
+const DeleteButton = styled.button`
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: pink;
+  }
+`;
+
 interface Product {
   name: string;
   price: string;
@@ -72,10 +88,57 @@ interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({ products }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [currentTime, setCurrentTime] = useState(new Date().getTime());
+  const [isAuctionEnded, setIsAuctionEnded] = useState(false);
+  const [checkedUser, setCheckedUser] = useState<boolean>(false);
+  const [username, setUsername] = useState("");
+  const [checkAdmin, setCheckAdmin] = useState(false);
+  const auctionEndTime = new Date("2023-11-29").getTime();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      setCurrentTime(now);
+      setIsAuctionEnded(now >= auctionEndTime);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [auctionEndTime]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8089/users/detail", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        setCheckedUser(true);
+        setUsername(res.data.data.username);
+        if (res.data.data.roles[0].name === "admin") {
+          setCheckAdmin(true);
+        }
+      });
+  }, [username]);
+
   const openModal = (product: Product) => {
     setSelectedProduct(product);
     setShowModal(true);
-  };
+  }
+
+  async function handleDelete(id: any) {
+    try {
+      await axios.delete(`http://localhost:8089/product/delete/${id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      toast.success("Deleting successfully");
+    } catch (e) {
+      toast.error("Something went wrong");
+    }
+  }
   return (
     <div
       style={{
@@ -88,13 +151,30 @@ const ProductItem: React.FC<ProductItemProps> = ({ products }) => {
         <ProductContainer key={index}>
           <ProductImage src={product.image} alt={product.name} />
           <ProductInfo>
-            <ProductName><Link style={{textDecoration:'none'}} to={`/detail/${product.id}`}>{product.name}</Link></ProductName>
-            <strong>Giá đấu cao nhất hiện tại:</strong><ProductPrice> {product.price}</ProductPrice>
-            <BidButton onClick={() => openModal(product)}>Trả giá</BidButton>
+            <ProductName>
+              <Link
+                style={{ textDecoration: "none" }}
+                to={`/detail/${product.id}`}
+              >
+                {product.name}
+              </Link>
+            </ProductName>
+            <strong>Giá đấu cao nhất hiện tại:</strong>
+            <ProductPrice> {product.price}</ProductPrice>
+            {!isAuctionEnded && !checkAdmin && (
+              <BidButton onClick={() => openModal(product)}>Trả giá</BidButton>
+            )}
+            {checkAdmin && (
+              <DeleteButton onClick={() => {
+                handleDelete(product.id)
+              }}>Loại bỏ</DeleteButton>
+            )}
           </ProductInfo>
         </ProductContainer>
       ))}
-      {showModal && selectedProduct && <Modal product={selectedProduct} onClose={() => setShowModal(false)} />}
+      {showModal && selectedProduct && (
+        <Modal product={selectedProduct} onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
 };

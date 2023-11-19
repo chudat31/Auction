@@ -14,6 +14,8 @@ import ProductDetail from "./components/ProductDetail/ProductDetail";
 import UserProfile from "./components/UserProfile/UserProfile";
 import ProductInformation from "./components/ProductInformation/ProductInformation";
 import { ToastContainer } from "react-toastify";
+import AddProduct from "./components/AddProduct/AddProduct";
+import FeedbackList from "./components/FeedbackList/FeedbackList";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -33,6 +35,8 @@ root.render(
           <Route path="/search" element={<ProductDetail />} />
           <Route path="/user/detail" element={<UserProfile />} />
           <Route path="/detail/:id" element={<ProductInformation />} />
+          <Route path="/add/product" element={<AddProduct />} />
+          <Route path="/feedbacklist" element={<FeedbackList />} />
         </Routes>
       </AnimatedPage>
     </BrowserRouter>

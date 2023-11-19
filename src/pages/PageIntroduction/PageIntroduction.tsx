@@ -5,7 +5,6 @@ import Header from '../Header/Header';
 const IntroComponent = () => {
   return (
     <div style={{ backgroundColor: '#f5f5f5', padding: '50px 0' }}>
-      {/* <Header /> */}
       <Container maxWidth="md">
         <Typography variant="h3" align="center" gutterBottom>
           Chào mừng đến với Trang Web Đấu Giá

@@ -79,8 +79,7 @@ function ProductDetail() {
           <h5>Tên sản phẩm: {name} </h5>
           <h5>Mô tả: {description} </h5>
           <img src={imageLink} alt="" />
-          <h5>Giá thành: {price} </h5>
-          <h5>Mã chứng nhận: {cert_id} </h5>
+          <h5>Giá đấu cao nhất hiện tại: {price} </h5>
         </div>
       )}
       {isSearch === false && <h3>No item was found</h3>}
