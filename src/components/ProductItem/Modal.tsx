@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
-import {toast} from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface Product {
   name: string;
   price: string;
@@ -100,7 +100,7 @@ const Input = styled.input`
 const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
   const [bidPrice, setBidPrice] = useState("");
   const [error, setError] = useState("");
-  const updateHandle = async (e : any) => {
+  const updateHandle = async (e: any) => {
     try {
       await axios.patch(
         `http://localhost:8089/product/update/${product.id}`,
@@ -114,7 +114,7 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
           },
         }
       );
-      toast.success("Trả giá thành công")
+      toast.success("Trả giá thành công");
     } catch (error) {
       toast.error("Trả giá thất bại");
     }
@@ -123,12 +123,14 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
     setBidPrice(e.target.value);
     setError("");
   };
-  const submitBid = (id : any) => {
+  const submitBid = (id: any) => {
     if (parseFloat(bidPrice) <= parseFloat(product.price)) {
       setError("Giá đề xuất phải lớn hơn giá hiện tại");
+    } else if (!bidPrice) {
+      setError("Vui lòng điền giá muốn đề xuất");
     } else {
       updateHandle(id);
-      onClose(); 
+      onClose();
     }
   };
   return (
@@ -157,7 +159,7 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
         <ModalFooter>
           <SubmitButton
             onClick={() => {
-              submitBid(product.id)
+              submitBid(product.id);
             }}
           >
             Trả giá

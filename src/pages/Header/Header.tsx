@@ -15,7 +15,6 @@ const Header = () => {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu">
-            {/* Icon hoặc nút menu */}
           </IconButton>
           <Typography
             variant="h6"
@@ -26,16 +25,13 @@ const Header = () => {
             AUCTION
           </Typography>
           <Button color="inherit" component={Link} to="/home">
-            Home
+            Trang chủ
           </Button>
           <Button color="inherit" component={Link} to="/introduction">
-            About Us
-          </Button>
-          <Button color="inherit" component={Link} to="/contact">
-            Contact
+            Về chúng tôi
           </Button>
           <Button color="inherit" component={Link} to="/search">
-            SEARCHING
+            Tìm kiếm sản phẩm
           </Button>
           <AuthenComponent />
         </Toolbar>
