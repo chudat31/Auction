@@ -4,6 +4,7 @@ import Header from "../../pages/Header/Header";
 import axios from "axios";
 import { Table } from "react-bootstrap";
 import moment from "moment";
+import { Link } from "react-router-dom";
 const FeedbackList = () => {
   const [listFeedback, setListFeedback] = useState<any>([]);
   useEffect(() => {
@@ -42,7 +43,7 @@ const FeedbackList = () => {
                       .format("MMMM Do YYYY, h:mm:ss a")}
                   </td>
                   <td className="content">{feedback.content?.split('"content":"')[1].split('"')[0]}</td>
-                  <td className="username">{feedback.user.username}</td>
+                  <td className="username"><Link style={{textDecoration:'none'}} to={`/user/${feedback.user.id}`}>{feedback.user.username}</Link></td>
                   <td className="phone_number">{feedback.user.phone_number}</td>
                 </tr>
               ))}

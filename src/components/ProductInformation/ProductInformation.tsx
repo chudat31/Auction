@@ -6,7 +6,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 function ProductInformation() {
 
-    const { id } = useParams();
+  const { id } = useParams();
 
   const [name, setName] = useState("");
 

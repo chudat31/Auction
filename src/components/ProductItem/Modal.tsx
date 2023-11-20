@@ -141,7 +141,7 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
           <CloseButton onClick={onClose}>&times;</CloseButton>
         </ModalHeader>
         <ModalBody>
-          <p>Đơn vị: VNĐ(Việt Nam đồng)</p>
+          <p>Đơn vị: USD</p>
           <p>Tên sản phẩm: {product.name}</p>
           <p>Giá hiện tại: {product.price}</p>
           <form>
