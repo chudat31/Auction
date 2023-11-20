@@ -15,6 +15,8 @@ function ProductInformation() {
   const [description, setDescription] = useState("");
 
   const [image, setImage] = useState("");
+
+  const [userPaidHighest, setUserPaidHighest] = useState("");
   useEffect(() => {
     axios
       .get(`http://localhost:8089/product/${id}`, {
@@ -27,6 +29,7 @@ function ProductInformation() {
         setPrice(res.data.data.price);
         setDescription(res.data.data.description);
         setImage(res.data.data.image);
+        setUserPaidHighest(res.data.data.username)
       });
   },[id]);
 
@@ -43,7 +46,10 @@ function ProductInformation() {
             <strong>Mô tả: </strong> { description }
           </p>
           <p>
-            <strong>Giá đấu cao nhất hiện tại: </strong> {price}
+            <strong>Giá đấu cao nhất hiện tại: </strong> {price}{' '}USD
+          </p>
+          <p>
+            <strong>Người trả giá cao nhất: </strong> {userPaidHighest}
           </p>
           <img src={image} alt="" />
         </div>

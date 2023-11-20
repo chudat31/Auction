@@ -125,7 +125,7 @@ function NewProduct() {
               value={price}
               onInput={addPrice}
               type="text"
-              placeholder="Giá đấu (VNĐ)"
+              placeholder="Giá đấu (USD)"
             />
           </Form.Group>
 
