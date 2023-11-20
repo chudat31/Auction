@@ -3,22 +3,22 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../../pages/Header/Header";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import moment from "moment";
-function UserProfile() {
+function UserInformation() {
   const [username, setUsername] = useState<any>();
 
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const [role, setRole] = useState("");
 
-  const [id, setId] = useState();
+  const [idx, setIdx] = useState();
 
-  const [isAdmin, setIsAdmin] = useState(false);
+  const {id} = useParams();
 
   useEffect(() => {
     axios
-      .get("http://localhost:8089/users/detail", {
+      .get(`http://localhost:8089/users/${id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -27,10 +27,9 @@ function UserProfile() {
         setUsername(res.data.data.username);
         setPhoneNumber(res.data.data.phone_number);
         setRole(res.data.data.roles[0].name);
-        if (role === "admin") setIsAdmin(true);
-        setId(res.data.data.id);
+        setIdx(res.data.data.id);
       });
-  }, [role]);
+  }, [id]);
 
   return (
     <React.Fragment>
@@ -58,29 +57,21 @@ function UserProfile() {
             <strong>Số điện thoại: </strong> {phoneNumber}
           </p>
           <p>
-            <strong>ID nhận dạng: </strong> {id}
+            <strong>ID nhận dạng: </strong> {idx}
           </p>
         </div>
       </div>
       <div className="button-block">
-        <button className="history-button">
-          <Link style={{ textDecoration: "none" }} to={`/history/${username}`}>
-            Xem lịch sử đấu giá
-          </Link>
+        <button
+          className="history-button"
+          
+        >
+          <Link style={{textDecoration:'none'}} to={`/history/${username}`}>Xem lịch sử đấu giá</Link>
+          
         </button>
-        {!isAdmin && (
-          <button className="history-button">
-            <Link
-              style={{ textDecoration: "none" }}
-              to={`/product/highest/${username}`}
-            >
-              Sản phẩm bạn đang đưa giá cao nhất
-            </Link>
-          </button>
-        )}
       </div>
     </React.Fragment>
   );
 }
 
-export default UserProfile;
+export default UserInformation;

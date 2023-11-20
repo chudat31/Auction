@@ -16,6 +16,9 @@ import ProductInformation from "./components/ProductInformation/ProductInformati
 import { ToastContainer } from "react-toastify";
 import AddProduct from "./components/AddProduct/AddProduct";
 import FeedbackList from "./components/FeedbackList/FeedbackList";
+import HistoryList from "./components/UserProfile/HistoryList";
+import UserInformation from "./components/UserProfile/UserInformation";
+import ProductHighest from "./components/UserProfile/ProductHighest";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -34,9 +37,12 @@ root.render(
           <Route path="/home" element={<LandingPage />} />
           <Route path="/search" element={<ProductDetail />} />
           <Route path="/user/detail" element={<UserProfile />} />
+          <Route path="/user/:id" element={<UserInformation />} />
           <Route path="/detail/:id" element={<ProductInformation />} />
           <Route path="/add/product" element={<AddProduct />} />
           <Route path="/feedbacklist" element={<FeedbackList />} />
+          <Route path="/history/:username" element={<HistoryList />} />
+          <Route path="/product/highest/:username" element={<ProductHighest />} />
         </Routes>
       </AnimatedPage>
     </BrowserRouter>
