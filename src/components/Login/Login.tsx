@@ -1,79 +1,71 @@
-import "./style.scss";
-import Form from "react-bootstrap/Form";
-import Button from "@mui/material/Button";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Header from "../../pages/Header/Header";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import "./style.scss";
 
 function Login() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const handleChangeUsername = (event: any) => {
+
+  const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
   };
 
-  const handleChangePassword = (event: any) => {
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
-  const submitForm = async (e: any) => {
-    // e.preventDefault();
-    var urlencoded = new URLSearchParams();
+
+  const submitForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const urlencoded = new URLSearchParams();
     urlencoded.append("username", username);
     urlencoded.append("password", password);
+
     try {
-      const respone = await axios.post(
-        "http://localhost:8089/users/login",
-        urlencoded
-      );
-      localStorage.setItem("token", respone.data.access_token);
-      toast.success("Đăng nhập thành công")
-      navigate("/introduction")
-    } catch (e) {
-      console.log(e);
-      toast.error("Thất bại, có lỗi xảy ra")
+      const response = await axios.post("http://localhost:8089/users/login", urlencoded);
+      localStorage.setItem("token", response.data.access_token);
+      toast.success("Đăng nhập thành công");
+      navigate("/introduction");
+    } catch (error) {
+      console.error(error);
+      toast.error("Thất bại, có lỗi xảy ra");
     }
   };
+
   return (
     <div className="login">
-      <img
-        src="https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        alt=""
-      />
-      <div className="text">
-        <h1>
-          Đăng nhập ngay để có thể sử dụng dịch vụ một cách tuyệt vời nhất
-        </h1>
-      </div>
       <div className="login_block">
         <h4>Login</h4>
-        <Form className="">
-          <Form.Group className="mb-3" controlId="">
-            <Form.Control
-              value={username}
-              onChange={handleChangeUsername}
-              type="text"
-            />
-            <span></span>
-            <Form.Label>Username</Form.Label>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="">
-            <Form.Control
-              value={password}
-              onChange={handleChangePassword}
-              type="password"
-            />
-            <span></span>
-            <Form.Label>Password</Form.Label>
-          </Form.Group>
+        <form onSubmit={submitForm}>
+          <TextField
+            label="Username"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={username}
+            onChange={handleChangeUsername}
+          />
+          <TextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={password}
+            onChange={handleChangePassword}
+          />
+          <Button type="submit" variant="contained" color="primary" fullWidth>
+            Login
+          </Button>
           <h5>
             Already have an account? <Link to={"/register"}>Register</Link>
           </h5>
-          <Button onClick={submitForm}>Login</Button>
-        </Form>
+        </form>
       </div>
     </div>
   );

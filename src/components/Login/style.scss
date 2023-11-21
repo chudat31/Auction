@@ -1,105 +1,94 @@
 .login {
-    height: 100vh;
-    img {
-      position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+
+  .login_block {
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    transform: translateY(0);
+    transition: transform 0.5s ease-in-out;
+    animation: slideIn 0.5s ease-in-out;
+
+    h4 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: #333;
     }
-    .text {
-      position: absolute;
-      left: 55%;
-      bottom: 60%;
-      width: 40%;
-      h1 {
-        text-transform: uppercase;
-        color: white;
-        transition: ease-in-out 0.5s;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .MuiTextField-root {
+        fieldset {
+          border-color: #ddd;
+          &:hover {
+            border-color: #a777e3;
+          }
+        }
+
+        label.Mui-focused {
+          color: #a777e3;
+        }
+
+        .MuiOutlinedInput-root {
+          &:hover fieldset {
+            border-color: #a777e3;
+          }
+          &.Mui-focused fieldset {
+            border-color: #a777e3;
+          }
+        }
+      }
+
+      .MuiButton-root {
+        margin-top: 20px;
+        background-color: #6e8efb;
         &:hover {
-          // transform: rotate(360deg);
-          color: forestgreen;
-          cursor: pointer;
+          background-color: #5a7bd5;
         }
       }
-    }
-    .login_block {
-      border: none;
-      position: absolute;
-      bottom: 40%;
-      left: 5%;
-      width: 30%;
-      height: 50%;
-      padding: 20px;
-      h4 {
-        width: 100%;
-        border-bottom: 2px solid rgb(201, 201, 201);
+
+      h5 {
         text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 20px;
-        padding: 10px;
-        color: white;
-      }
-      form {
-        width: 100%;
-        border: 0px rgba(254, 231, 231, 0.896);
-        div {
-          position: relative;
-        }
-        input {
-          height: 60%;
-          border: none;
-          background: none;
-          outline: none;
-          padding: 9px;
-          margin: 9px;
-          font-weight: 700;
-          color: white;
-        }
-        input:focus {
-          background: none;
-          outline: none;
-          border: none;
-        }
-        input:focus ~ label {
-          top: -8px;
-        }
-        input:valid ~ label {
-          top: -8px;
-        }
-        span::before {
-          content: "";
-          position: absolute;
-          top: 40px;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: #2691d9;
-        }
-        label {
-          width: 100%;
-          position: absolute;
-          top: 20%;
-          left: 15px;
-          color: white;
-          pointer-events: none;
-          transition: ease-in-out 0.5s;
-        }
-        button {
-          width: 100%;
-        }
-        h5 {
-          text-align: center;
-          margin-bottom: 15px;
-          color: white;
-          a {
-            color: white;
+        margin-top: 10px;
+        font-size: 16px;
+
+        a {
+          color: #6e8efb;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
           }
         }
       }
     }
-    img {
-      filter: brightness(50%);
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
   }
-  
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  .login_block {
+    width: 90%;
+    padding: 20px;
+  }
+}
