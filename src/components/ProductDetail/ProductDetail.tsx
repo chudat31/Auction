@@ -24,7 +24,8 @@ function ProductDetail() {
 
   const [cert_id, setCert_id] = useState();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
     axios
       .get(`http://localhost:8089/product/search/${nameEnter}`, {
         headers: {
@@ -59,7 +60,7 @@ function ProductDetail() {
       <h1>
         <i>Tìm kiếm thông tin sản phẩm</i>
       </h1>
-      <Form className="d-flex">
+      <Form onSubmit={handleSubmit} className="d-flex">
         <input
           value={nameEnter}
           ref={nameRef}

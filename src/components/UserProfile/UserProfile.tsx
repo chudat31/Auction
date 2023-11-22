@@ -12,9 +12,40 @@ function UserProfile() {
 
   const [role, setRole] = useState("");
 
-  const [id, setId] = useState();
+  const [idx, setIdx] = useState();
 
   const [isAdmin, setIsAdmin] = useState(false);
+
+  const [isAuctionEnded, setIsAuctionEnded] = useState(false);
+
+  const [currentTime, setCurrentTime] = useState(new Date().getTime());
+
+  const id = 1;
+
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8089/time/${id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        const [year, month, day, hour, minute] = res.data?.time;
+        setTime(new Date(year, month - 1, day, hour, minute));
+      });
+  }, [id]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      setCurrentTime(now);
+      setIsAuctionEnded(now >= time.getTime());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [time]);
 
   useEffect(() => {
     axios
@@ -28,7 +59,7 @@ function UserProfile() {
         setPhoneNumber(res.data.data.phone_number);
         setRole(res.data.data.roles[0].name);
         if (role === "admin") setIsAdmin(true);
-        setId(res.data.data.id);
+        setIdx(res.data.data.id);
       });
   }, [role]);
 
@@ -58,7 +89,7 @@ function UserProfile() {
             <strong>Số điện thoại: </strong> {phoneNumber}
           </p>
           <p>
-            <strong>ID nhận dạng: </strong> {id}
+            <strong>ID nhận dạng: </strong> {idx}
           </p>
         </div>
       </div>
@@ -68,13 +99,23 @@ function UserProfile() {
             Xem lịch sử đấu giá
           </Link>
         </button>
-        {!isAdmin && (
+        {!isAdmin && !isAuctionEnded && (
           <button className="history-button">
             <Link
               style={{ textDecoration: "none" }}
               to={`/product/highest/${username}`}
             >
               Sản phẩm bạn đang đưa giá cao nhất
+            </Link>
+          </button>
+        )}
+        {!isAdmin && isAuctionEnded && (
+          <button className="history-button">
+            <Link
+              style={{ textDecoration: "none" }}
+              to={`/product/highest/${username}`}
+            >
+              Sản phẩm bạn đấu giá thành công
             </Link>
           </button>
         )}

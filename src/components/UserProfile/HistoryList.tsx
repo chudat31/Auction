@@ -41,7 +41,7 @@ const HistoryList = () => {
           {data.map((item: any, index: any) => (
             <tr key={index}>
               <td className="time">
-                {moment.utc(item.datetime).format("MMMM Do YYYY, h:mm:ss a")}
+                {moment.utc(item.datetime).format("DD MM YYYY, h:mm:ss a")}
               </td>
               {username === "chudat" && (
                 <td className="username">

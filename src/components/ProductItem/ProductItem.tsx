@@ -93,17 +93,32 @@ const ProductItem: React.FC<ProductItemProps> = ({ products }) => {
   const [checkedUser, setCheckedUser] = useState<boolean>(false);
   const [username, setUsername] = useState("");
   const [checkAdmin, setCheckAdmin] = useState(false);
-  const auctionEndTime = new Date("2023-11-29").getTime();
+  const id = 1;
+
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8089/time/${id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        const [year, month, day, hour, minute] = res.data?.time;
+        setTime(new Date(year, month - 1, day, hour, minute));
+      });
+  }, [id]);
 
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date().getTime();
       setCurrentTime(now);
-      setIsAuctionEnded(now >= auctionEndTime);
+      setIsAuctionEnded(now >= time.getTime());
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [auctionEndTime]);
+  }, [time]);
 
   useEffect(() => {
     axios
