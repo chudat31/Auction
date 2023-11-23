@@ -11,20 +11,28 @@ function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isValid, setIsValid] = useState(true);
 
   const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
+    setIsValid(validateEmail(event.target.value));
   };
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+};
+
   const submitForm = async (e: React.FormEvent) => {
     e.preventDefault();
     const urlencoded = new URLSearchParams();
     urlencoded.append("username", username);
     urlencoded.append("password", password);
+    localStorage.setItem("username", username);
 
     try {
       const response = await axios.post("http://localhost:8089/users/login", urlencoded);
@@ -40,18 +48,19 @@ function Login() {
   return (
     <div className="login">
       <div className="login_block">
-        <h4>Login</h4>
+        <h4>Đăng nhập</h4>
         <form onSubmit={submitForm}>
           <TextField
-            label="Username"
+            label="Email"
             variant="outlined"
             fullWidth
             margin="normal"
             value={username}
             onChange={handleChangeUsername}
           />
+          {(!isValid && username) && <p style={{color:'red'}}>Email không đúng định dạng</p>}
           <TextField
-            label="Password"
+            label="Mật khẩu"
             type="password"
             variant="outlined"
             fullWidth
@@ -59,8 +68,8 @@ function Login() {
             value={password}
             onChange={handleChangePassword}
           />
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            Login
+          <Button disabled={!isValid} type="submit" variant="contained" color="primary" fullWidth>
+            Đăng nhập
           </Button>
           <h5>
             Already have an account? <Link to={"/register"}>Register</Link>

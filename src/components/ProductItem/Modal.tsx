@@ -106,13 +106,8 @@ const Modal: React.FC<ModalProps> = ({ product, onClose }) => {
         `http://localhost:8089/product/update/${product.id}`,
         {
           price: bidPrice,
+          username: localStorage.getItem("username")
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
       );
       toast.success("Trả giá thành công");
     } catch (error) {

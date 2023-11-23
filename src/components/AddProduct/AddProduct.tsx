@@ -57,12 +57,6 @@ function NewProduct() {
           description,
           image
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
       );
 
       toast.success("Thêm mới vật phẩm thành công");

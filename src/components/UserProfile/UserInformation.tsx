@@ -18,16 +18,12 @@ function UserInformation() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8089/users/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/users/${id}`)
       .then((res) => {
-        setUsername(res.data.data.username);
-        setPhoneNumber(res.data.data.phone_number);
-        setRole(res.data.data.roles[0].name);
-        setIdx(res.data.data.id);
+        setUsername(res?.data?.data?.username);
+        setPhoneNumber(res?.data?.data?.phone_number);
+        setRole(res?.data?.data?.roles?.[0]?.name);
+        setIdx(res?.data?.data?.id);
       });
   }, [id]);
 
@@ -48,7 +44,7 @@ function UserInformation() {
         </div>
         <div id="two">
           <p>
-            <strong>Tên đăng nhập: </strong> {username}
+            <strong>Email: </strong> {username}
           </p>
           <p>
             <strong>Vai trò: </strong> {role}

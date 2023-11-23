@@ -29,7 +29,7 @@ root.render(
     <BrowserRouter>
       <AnimatedPage>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/introduction" element={<PageIntroduction />} />

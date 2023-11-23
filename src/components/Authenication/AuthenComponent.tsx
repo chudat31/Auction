@@ -12,16 +12,11 @@ function AuthenComponent() {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:8089/users/detail", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-          "Content-Type": "application/json",
-        },
-      })
+      .get(`http://localhost:8089/users/detail/${localStorage.getItem("username")}`)
       .then((res) => {
         setCheckedUser(true);
-        setUsername(res.data.data.username);
-        if (res.data.data?.roles[0].name === "admin") {
+        setUsername(res?.data?.data?.username);
+        if (res?.data?.data?.roles?.[0]?.name === "admin") {
           setCheckAdmin(true);
         }
       });
@@ -29,12 +24,13 @@ function AuthenComponent() {
 
   const logOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("username")
     setCheckedUser(false);
     navigate("/login");
   };
   return (
     <React.Fragment>
-      {checkedUser && !checkAdmin && (
+      {checkedUser && !checkAdmin && username && (
         <Button color="inherit" component={Link} to="/contact">
           Gửi phản hồi
         </Button>
@@ -50,23 +46,23 @@ function AuthenComponent() {
         </Button>
       )}
 
-      {!checkedUser && (
+      {checkedUser && !username && (
         <Button color="inherit" component={Link} to="/login">
           Đăng nhập
         </Button>
       )}
 
-      {!checkedUser && (
+      {checkedUser && !username && (
         <Button color="inherit" component={Link} to="/register">
           Đăng ký
         </Button>
       )}
-      {checkedUser && (
+      {checkedUser && username && (
         <Button color="inherit" component={Link} to="/user/detail">
           Thông tin người dùng
         </Button>
       )}
-      {checkedUser && (
+      {checkedUser && username && (
         <Button onClick={logOut} color="inherit">
           Đăng xuất
         </Button>
