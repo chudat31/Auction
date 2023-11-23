@@ -21,7 +21,7 @@ function AuthenComponent() {
       .then((res) => {
         setCheckedUser(true);
         setUsername(res.data.data.username);
-        if (res.data.data.roles[0].name === "admin") {
+        if (res.data.data?.roles[0].name === "admin") {
           setCheckAdmin(true);
         }
       });

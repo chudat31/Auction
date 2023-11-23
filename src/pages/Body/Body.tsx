@@ -44,7 +44,7 @@ function Body() {
         },
       })
       .then((res) => {
-        if (res.data.data.roles[0].name === "admin") setIsAdmin(true);
+        if (res.data.data?.roles[0].name === "admin") setIsAdmin(true);
       });
   }, []);
 

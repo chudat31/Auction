@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import { QRCodeSVG } from "qrcode.react";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../../pages/Header/Header";
@@ -65,6 +66,7 @@ const ProductHighest = () => {
           <tr>
             <th>Tên vật phẩm</th>
             <th>Giá đấu của bạn</th>
+            <th>Thanh toán</th>
           </tr>
         </thead>
         <tbody>
@@ -79,6 +81,7 @@ const ProductHighest = () => {
                 </Link>
               </td>
               <td>{item.price} (USD)</td>
+              <td><img style={{width:100, height:100}} src="https://scontent.fhan5-2.fna.fbcdn.net/v/t1.15752-9/386893129_725146072840493_4922307142151859850_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=s_O2iq2mdNIAX-kPZFe&_nc_ht=scontent.fhan5-2.fna&oh=03_AdQLW9dM_P8Cp9WYdRQblYcO_5glw1zz2CKvuuaSDTtpIA&oe=658671FC" alt="" /></td>
             </tr>
           ))}
         </tbody>
