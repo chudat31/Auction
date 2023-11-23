@@ -9,14 +9,23 @@ function Register() {
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [errorPhoneNumber, setErrorPhoneNumber] = useState("");
+  const [isValid, setIsValid] = useState(true);
   const navigate = useNavigate();
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+};
 
   const validatePhoneNumber = (input:any) => {
     const pattern = /^(\+\d{1,3})?[-.\s]?\(?(\d{3})\)?[-.\s]?(\d{3})[-.\s]?(\d{4})$/;
     return pattern.test(input);
   };
 
-  const handleChangeUsername = (event:any) => setUsername(event.target.value);
+  const handleChangeUsername = (event:any) => {
+    setUsername(event.target.value);
+    setIsValid(validateEmail(event.target.value));
+  }
   const handleChangePassword = (event:any) => setPassword(event.target.value);
   const handleChangePhone = (event:any) => {
     setPhoneNumber(event.target.value);
@@ -58,13 +67,14 @@ function Register() {
       </Typography>
       <TextField
         fullWidth
-        label="Username"
+        label="Email"
         variant="outlined"
         value={username}
         onChange={handleChangeUsername}
         margin="normal"
         sx={{ mb: 2 }}
       />
+      {(!isValid && username) && <p style={{color:'red'}}>Email không đúng định dạng</p>}
       <TextField
         fullWidth
         label="Password"
@@ -95,6 +105,7 @@ function Register() {
         color="primary"
         onClick={signup}
         sx={{ mt: 1, mb: 2 }}
+        disabled={!isValid}
       >
         Đăng ký
       </Button>

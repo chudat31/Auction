@@ -26,11 +26,7 @@ function UserProfile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8089/time/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/time/${id}`)
       .then((res) => {
         const [year, month, day, hour, minute] = res.data?.time;
         setTime(new Date(year, month - 1, day, hour, minute));
@@ -49,17 +45,13 @@ function UserProfile() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8089/users/detail", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+    .get(`http://localhost:8089/users/detail/${localStorage.getItem("username")}`)
       .then((res) => {
-        setUsername(res.data.data.username);
-        setPhoneNumber(res.data.data.phone_number);
-        setRole(res.data.data.roles[0].name);
+        setUsername(res?.data?.data?.username);
+        setPhoneNumber(res?.data?.data?.phone_number);
+        setRole(res?.data?.data?.roles?.[0]?.name);
         if (role === "admin") setIsAdmin(true);
-        setIdx(res.data.data.id);
+        setIdx(res?.data?.data?.id);
       });
   }, [role]);
 
@@ -80,7 +72,7 @@ function UserProfile() {
         </div>
         <div id="two">
           <p>
-            <strong>Tên đăng nhập: </strong> {username}
+            <strong>Email: </strong> {username}
           </p>
           <p>
             <strong>Vai trò: </strong> {role}

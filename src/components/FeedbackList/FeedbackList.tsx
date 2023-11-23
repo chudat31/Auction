@@ -9,11 +9,7 @@ const FeedbackList = () => {
   const [listFeedback, setListFeedback] = useState<any>([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8089/feedback", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get("http://localhost:8089/feedback")
       .then((res) => {
         setListFeedback(res.data.data);
       });

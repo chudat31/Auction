@@ -15,11 +15,7 @@ const ContactComponent = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8089/users/detail", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/users/detail/${localStorage.getItem("username")}`)
       .then((res) => {
         setUserId(res.data.data.id);
       });
@@ -33,11 +29,6 @@ const ContactComponent = () => {
         {
           content:content,
         },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
       );
       toast.success("Thêm phản hồi thành công");
       setContent("");

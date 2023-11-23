@@ -19,17 +19,13 @@ function ProductInformation() {
   const [userPaidHighest, setUserPaidHighest] = useState("");
   useEffect(() => {
     axios
-      .get(`http://localhost:8089/product/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/product/${id}`)
       .then((res) => {
         setName(res.data.data.name);
         setPrice(res.data.data.price);
         setDescription(res.data.data.description);
         setImage(res.data.data.image);
-        setUserPaidHighest(res.data.data.username)
+        setUserPaidHighest(res?.data?.data?.username)
       });
   },[id]);
 

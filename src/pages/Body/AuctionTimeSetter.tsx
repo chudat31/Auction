@@ -54,11 +54,6 @@ function AuctionTimerSetter() {
         {
           time: formattedDateTime
         },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
       )
       .then((res) => {
         toast.success("Thay đổi thời gian đấu giá thành công")

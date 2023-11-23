@@ -28,23 +28,15 @@ function Body() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8089/product", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get("http://localhost:8089/product")
       .then((res) => setProducts(res.data.data));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8089/users/detail", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+    .get(`http://localhost:8089/users/detail/${localStorage.getItem("username")}`)
       .then((res) => {
-        if (res.data.data?.roles[0].name === "admin") setIsAdmin(true);
+        if (res?.data?.data?.roles?.[0].name === "admin") setIsAdmin(true);
       });
   }, []);
 

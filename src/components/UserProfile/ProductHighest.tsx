@@ -20,11 +20,7 @@ const ProductHighest = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8089/time/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/time/${id}`)
       .then((res) => {
         const [year, month, day, hour, minute] = res.data?.time;
         setTime(new Date(year, month - 1, day, hour, minute));
@@ -43,11 +39,7 @@ const ProductHighest = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8089/product/highest/${username}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/product/highest/${username}`)
       .then((res) => {
         setData(res.data.data);
       });
@@ -66,7 +58,7 @@ const ProductHighest = () => {
           <tr>
             <th>Tên vật phẩm</th>
             <th>Giá đấu của bạn</th>
-            <th>Thanh toán</th>
+            {isAuctionEnded && <th>Thanh toán</th>}
           </tr>
         </thead>
         <tbody>
@@ -81,7 +73,7 @@ const ProductHighest = () => {
                 </Link>
               </td>
               <td>{item.price} (USD)</td>
-              <td><img style={{width:100, height:100}} src="https://scontent.fhan5-2.fna.fbcdn.net/v/t1.15752-9/386893129_725146072840493_4922307142151859850_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=s_O2iq2mdNIAX-kPZFe&_nc_ht=scontent.fhan5-2.fna&oh=03_AdQLW9dM_P8Cp9WYdRQblYcO_5glw1zz2CKvuuaSDTtpIA&oe=658671FC" alt="" /></td>
+              {isAuctionEnded && <td><img style={{width:100, height:100}} src="https://scontent.fhan5-2.fna.fbcdn.net/v/t1.15752-9/386893129_725146072840493_4922307142151859850_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=s_O2iq2mdNIAX-kPZFe&_nc_ht=scontent.fhan5-2.fna&oh=03_AdQLW9dM_P8Cp9WYdRQblYcO_5glw1zz2CKvuuaSDTtpIA&oe=658671FC" alt="" /></td>}
             </tr>
           ))}
         </tbody>

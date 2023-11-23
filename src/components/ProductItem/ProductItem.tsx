@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { Button } from "react-bootstrap";
@@ -94,18 +94,15 @@ const ProductItem: React.FC<ProductItemProps> = ({ products }) => {
   const [username, setUsername] = useState("");
   const [checkAdmin, setCheckAdmin] = useState(false);
   const id = 1;
+  const navigate = useNavigate();
 
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8089/time/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/time/${id}`)
       .then((res) => {
-        const [year, month, day, hour, minute] = res.data?.time;
+        const [year, month, day, hour, minute] = res?.data?.time;
         setTime(new Date(year, month - 1, day, hour, minute));
       });
   }, [id]);
@@ -122,36 +119,32 @@ const ProductItem: React.FC<ProductItemProps> = ({ products }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8089/users/detail", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-          "Content-Type": "application/json",
-        },
-      })
+    .get(`http://localhost:8089/users/detail/${localStorage.getItem("username")}`)
       .then((res) => {
         setCheckedUser(true);
-        setUsername(res.data.data.username);
-        if (res.data.data?.roles[0].name === "admin") {
+        setUsername(res?.data?.data?.username);
+        if (res?.data?.data?.roles?.[0]?.name === "admin") {
           setCheckAdmin(true);
         }
       });
   }, [username]);
 
   const openModal = (product: Product) => {
-    setSelectedProduct(product);
-    setShowModal(true);
+    if(username) {
+      setSelectedProduct(product);
+      setShowModal(true);
+    } else {
+      navigate("/login")
+      toast.warning("Vui lòng đăng nhập để tham gia trả giá")
+    } 
   }
 
   async function handleDelete(id: any) {
     try {
-      await axios.delete(`http://localhost:8089/product/delete/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
-      toast.success("Deleting successfully");
+      await axios.delete(`http://localhost:8089/product/delete/${id}`);
+      toast.success("Xóa vật phẩm thành công");
     } catch (e) {
-      toast.error("Something went wrong");
+      toast.error("Có lỗi xảy ra");
     }
   }
   return (

@@ -27,11 +27,7 @@ function ProductDetail() {
   const handleSubmit = (e:any) => {
     e.preventDefault();
     axios
-      .get(`http://localhost:8089/product/search/${nameEnter}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/product/search/${nameEnter}`)
       .then((respone) => {
         window.setTimeout(() => {
           setIsSearch(true);

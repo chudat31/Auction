@@ -19,11 +19,7 @@ const CountdownTimer = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8089/time/${id}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/time/${id}`)
       .then((res) => {
         const [year, month, day, hour, minute] = res.data?.time;
         setTime(new Date(year, month - 1, day, hour, minute));

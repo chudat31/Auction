@@ -11,11 +11,7 @@ const HistoryList = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8089/history/${username}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
+      .get(`http://localhost:8089/history/${username}`)
       .then((res) => {
         setData(res.data.data);
       });
@@ -26,13 +22,13 @@ const HistoryList = () => {
       <Header />
       <h3>
         Lịch sử đấu giá của{" "}
-        {username === "chudat" ? "người dùng" : `${username}`}
+        {username === "chudat@gmail.com" ? "người dùng" : `${username?.split("@")[0]}`}
       </h3>
       <table>
         <thead>
           <tr>
             <th>Thời gian</th>
-            {username === "chudat" && <th>Người dùng</th>}
+            {username === "chudat@gmail.com" && <th>Người dùng</th>}
             <th>Tên vật phẩm</th>
             <th>Giá đấu</th>
           </tr>
@@ -43,13 +39,13 @@ const HistoryList = () => {
               <td className="time">
                 {moment.utc(item.datetime).format("DD MM YYYY, h:mm:ss a")}
               </td>
-              {username === "chudat" && (
+              {username === "chudat@gmail.com" && (
                 <td className="username">
                   <Link
                     style={{ textDecoration: "none" }}
                     to={`/user/${item.user.id}`}
                   >
-                    {item.username}
+                    {item.username.split("@")[0]}
                   </Link>
                 </td>
               )}
